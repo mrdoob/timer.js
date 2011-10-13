@@ -4,7 +4,7 @@
 
 var Timer = function ( duration ) {
 
-	var that = this, time, prevtime, interval;
+	var _this = this, _time, _prevtime, _interval;
 
 	this.currentTime = 0;
 	this.duration = duration || NaN;
@@ -14,43 +14,43 @@ var Timer = function ( duration ) {
 	this.loop = false;
 	this.ended = false;
 
-	var update = function () {
+	var _update = function () {
 
-		if ( that.currentTime >= that.duration ) {
+		if ( _this.currentTime >= _this.duration ) {
 
-			if ( that.loop ) {
+			if ( _this.loop ) {
 
-				that.currentTime -= that.duration;
+				_this.currentTime -= _this.duration;
 
 			} else {
 
-				that.ended = true;
+				_this.ended = true;
 				return;
 
 			}
 
 		}
 
-		this.ended = false;
+		_this.ended = false;
 
-		time = new Date().getTime();
-		that.currentTime += ( ( time - prevtime ) * that.playbackRate ) / 1000;
-		prevtime = time;
+		_time = new Date().getTime();
+		_this.currentTime += ( ( _time - _prevtime ) * _this.playbackRate ) / 1000;
+		_prevtime = _time;
 
 	};
 
 	this.play = function () {
 
-		prevtime = new Date().getTime();
-		interval = setInterval( update, 1000 / 60 );
-		that.paused = false;
+		_prevtime = new Date().getTime();
+		_interval = setInterval( _update, 1000 / 60 );
+		_this.paused = false;
 
 	};
 
 	this.pause = function () {
 
-		clearInterval( interval );
-		that.paused = true;
+		clearInterval( _interval );
+		_this.paused = true;
 
 	};
 
