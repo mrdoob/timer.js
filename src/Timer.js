@@ -4,10 +4,9 @@
 
 var Timer = function ( duration ) {
 
-	var _this = this,
-	_interval,
+	var _this = this, _interval,
 	_time, _prevtime,
-	_timedelta = 0;
+	_delta, _deltatime = 0;
 
 	this.currentTime = 0;
 	this.duration = duration || Infinity;
@@ -44,8 +43,8 @@ var Timer = function ( duration ) {
 
 	this.getDelta = function () {
 
-		_delta = _time - _timedelta;
-		_timedelta = _time;
+		_delta = _time - _deltatime;
+		_deltatime = _time;
 		return _delta;
 
 	};
