@@ -33,7 +33,7 @@ var Timer = function ( duration ) {
 
 		_this.ended = false;
 
-		_time = new Date().getTime();
+		_time = Date.now();
 		_this.currentTime += ( ( _time - _prevtime ) * _this.playbackRate ) / 1000;
 		_prevtime = _time;
 
@@ -41,7 +41,7 @@ var Timer = function ( duration ) {
 
 	this.play = function () {
 
-		_prevtime = new Date().getTime();
+		_prevtime = Date.now();
 		_interval = setInterval( _update, 1000 / 60 );
 		_this.paused = false;
 
