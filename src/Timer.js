@@ -6,6 +6,7 @@ var Timer = function ( duration ) {
 
 	var _this = this, _time, _prevtime, _interval;
 
+	this.currentDelta = 0;
 	this.currentTime = 0;
 	this.duration = duration || Infinity;
 	this.paused = true;
@@ -20,10 +21,12 @@ var Timer = function ( duration ) {
 
 			if ( _this.loop ) {
 
-				_this.currentTime -= _this.duration;
+				_this.currentDelta = - _this.duration;
+				_this.currentTime += _this.currentDelta;
 
 			} else {
 
+				_this.currentDelta = 0;
 				_this.ended = true;
 				return;
 
@@ -34,7 +37,8 @@ var Timer = function ( duration ) {
 		_this.ended = false;
 
 		_time = Date.now();
-		_this.currentTime += ( ( _time - _prevtime ) * _this.playbackRate ) / 1000;
+		_this.currentDelta = ( ( _time - _prevtime ) * _this.playbackRate ) / 1000;
+		_this.currentTime += _this.currentDelta;
 		_prevtime = _time;
 
 	};
@@ -49,8 +53,9 @@ var Timer = function ( duration ) {
 
 	this.pause = function () {
 
-		clearInterval( _interval );
+		_this.currentDelta = 0;
 		_this.paused = true;
+		clearInterval( _interval );
 
 	};
 
