@@ -4,9 +4,11 @@
 
 var Timer = function ( duration ) {
 
-	var _this = this, _time, _prevtime, _interval;
+	var _this = this,
+	_interval,
+	_time, _prevtime,
+	_timedelta = 0;
 
-	this.currentDelta = 0;
 	this.currentTime = 0;
 	this.duration = duration || Infinity;
 	this.paused = true;
@@ -21,12 +23,10 @@ var Timer = function ( duration ) {
 
 			if ( _this.loop ) {
 
-				_this.currentDelta = - _this.duration;
-				_this.currentTime += _this.currentDelta;
+				_this.currentTime -= _this.duration;
 
 			} else {
 
-				_this.currentDelta = 0;
 				_this.ended = true;
 				return;
 
@@ -37,9 +37,16 @@ var Timer = function ( duration ) {
 		_this.ended = false;
 
 		_time = Date.now();
-		_this.currentDelta = ( ( _time - _prevtime ) * _this.playbackRate ) / 1000;
-		_this.currentTime += _this.currentDelta;
+		_this.currentTime += ( ( _time - _prevtime ) * _this.playbackRate ) / 1000;
 		_prevtime = _time;
+
+	};
+
+	this.getDelta = function () {
+
+		_delta = _time - _timedelta;
+		_timedelta = _time;
+		return _delta;
 
 	};
 
@@ -53,7 +60,6 @@ var Timer = function ( duration ) {
 
 	this.pause = function () {
 
-		_this.currentDelta = 0;
 		_this.paused = true;
 		clearInterval( _interval );
 
