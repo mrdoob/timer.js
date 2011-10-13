@@ -7,7 +7,7 @@ var Timer = function ( duration ) {
 	var _this = this, _time, _prevtime, _interval;
 
 	this.currentTime = 0;
-	this.duration = duration || NaN;
+	this.duration = duration || Infinity;
 	this.paused = true;
 	this.defaultPlaybackRate = 1;
 	this.playbackRate = 1;
