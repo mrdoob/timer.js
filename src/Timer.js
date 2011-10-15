@@ -8,6 +8,7 @@ var Timer = function ( duration ) {
 	_time, _prevtime,
 	_delta, _deltatime = 0;
 
+	this.fps = 60;
 	this.currentTime = 0;
 	this.duration = duration || Infinity;
 	this.paused = true;
@@ -52,7 +53,7 @@ var Timer = function ( duration ) {
 	this.play = function () {
 
 		_prevtime = Date.now();
-		_interval = setInterval( _update, 1000 / 60 );
+		_interval = setInterval( _update, 1000 / _this.fps );
 		_this.paused = false;
 
 	};
