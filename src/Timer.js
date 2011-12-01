@@ -52,9 +52,13 @@ var Timer = function ( duration ) {
 
 	this.play = function () {
 
-		_prevtime = Date.now();
-		_interval = setInterval( _update, 1000 / _this.fps );
-		_this.paused = false;
+		if ( _this.paused ) {
+
+			_prevtime = Date.now();
+			_interval = setInterval( _update, 1000 / _this.fps );
+			_this.paused = false;
+
+		}
 
 	};
 
