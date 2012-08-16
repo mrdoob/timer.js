@@ -1,7 +1,7 @@
 timer.js
 ========
 
-#### Javacript timer replacement for audio ####
+#### JavaScript timer replacement for audio ####
 
 ### Usage ###
 
